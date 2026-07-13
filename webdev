@@ -15,3 +15,24 @@ for reasons i struggle to grasp, the following line in <head> is very important 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 Array.some() and Array.every() work vaguely like Python any() and all(), respectively
+
+arr.concat(other) works like Python's + on lists, to join Arrays
+
+iterate indices in an Array with
+for (const i in arr) {
+    ...
+}
+
+Element.append() and Element.appendChild() are mostly the same, but .append() is more flexible and thus recommended
+
+access the clipboard for automatic copy/paste with navigator.clipboard.writeText() and readText(), which are only available "shortly after" a user interaction
+
+to make a label element fill a td for better clicking
+td {
+    padding: 0;
+}
+td > label {
+    display: block;
+    width: 100%;
+    height: 100%;
+}

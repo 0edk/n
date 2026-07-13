@@ -28,8 +28,8 @@ enhance Yukogurafu: put well-drawn graphs (Graphviz?) in the normal editor for D
 
 implement infix-only language further than ever before, with Prolog type inference (if that turns out practical) and compilation thru qbe
 
-3D model to drawing via fragment shader or equivalent: draw lines at and only at pixels of "fast-changing" normals, materials, and/or hit-depths
-
 highly configurable/reprogrammable e-paper smartwatch (definitely seek prior art)
 input by a small number of side buttons, and/or accelerometre/gyrometre for a Dasher-like text input method
 perhaps port a vi-like editor adapted for unusually few buttons, treating a repeat tap as more expensive than a different-button tap
+
+ergonomically split-tilted keyboard, made cheaper and more flexible (figuratively and literally?) with capacitative touch-sensitive sheets instead of mechanical switches, maybe a couple conventional buttons under the thumbs

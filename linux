@@ -149,3 +149,12 @@ to write to /dev/ttyUSB0, you must be in uucp group (apparently dialout on other
 loginctl suspend via laptop lid close has been very laggy on my machine, but inconsistently and (it appeared) only after the system was up for a long time
 preliminarily: time since last resume + lag from new lid-close to actual suspend = 30 s + epsilon, which 30 s figure causally matches loginctl's HoldoffTimeoutSec parameter, which is apparently a feature, not a bug (see elogind documentation)
 ChatGPT tells me the point of that is to handle the (rare for me) situation that i dock the laptop while it's closed/suspended, resume it, and close it again quickly, before elogind can detect the docking and change its behaviour
+
+update v0.14.0 to flameshot screenshot program makes it rely on xdg-desktop-portal in place of wlroots grim, which is fragile if not given the right context
+https://github.com/flameshot-org/flameshot/issues/3363
+https://github.com/flameshot-org/flameshot/blob/master/docs/UsageHyprlandSwayWlroots.md
+https://github.com/flameshot-org/flameshot/commit/53d4da8fcd0e00b755b3329674b756d9777d3a89#diff-02333ff2ef382a3af2466deae0144a16b0bbdb8b36519e01e3d0654308656c2e
+fix: run sway as
+export XDG_CURRENT_DESKTOP=sway dbus-run-session sway
+with the following line in sway config
+exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
