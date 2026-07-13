@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # run in the directory of notes to make HTMLs
 
+from datetime import datetime
 import html
 import os
 from os import path
@@ -20,7 +21,9 @@ HEADER = """<!doctype html>
         <h1>{long}</h1>
 """
 FOOTER = """
-        <footer><a href="{short}">raw text</a> - <a href="../index.html">homepage</a></footer>
+        <footer><i>Updated {date}</i> -
+        <a href="{short}">raw text</a> -
+        <a href="../index.html">homepage</a></footer>
     </body>
 </html>
 """
@@ -31,7 +34,7 @@ SOURCES = [
 for source_name in SOURCES:
     reflective = path.basename(sys.argv[0]) == source_name
     with open(f"{source_name}.html", "w") as target:
-        with open(f"{source_name}", "r") as source:
+        with open(source_name, "r") as source:
             target.write(HEADER.format(
                 short=source_name,
                 long="notes-to-HTML script" if reflective
@@ -53,6 +56,9 @@ for source_name in SOURCES:
                     for paragraph in source.read().split("\n\n")
                 ))
             target.write(FOOTER.format(
+                date=datetime.fromtimestamp(
+                    path.getmtime(source_name)
+                ).strftime("%Y-%m-%d"),
                 short=source_name,
             ))
     if reflective:
