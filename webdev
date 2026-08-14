@@ -36,3 +36,17 @@ td > label {
     width: 100%;
     height: 100%;
 }
+
+draw a circle in a CanvasRenderingContext2D with ctx.arc(x, y, rad, 0, Math.PI * 2) between ctx.beginPath() and ctx.fill() or ctx.stroke()
+clear the canvas with ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+Element.onclick receives a MouseEvent, of which some prominent properties are button, offsetX, offsetY, ctrlKey, shiftKey
+while MouseEvent.button == 2 on a right-click, the typical browser doesn't make a click event for that, but a contextmenu event, handled separately
+
+Array.flatMap((elem, ind, arr) => [...]) lets you yield a variable number of elements in the mapped array per input element, as by alternating 0 and 1 outputs per input
+
+remove a segment from an Array with arr.splice(index, count)
+
+[...Array(n)] works like Python n * [None], which can convert with Array.map to a list-comprehension on range(n)
+
+HTML <cite> element italicises text like <em> or <i>, but semantically indicates titles of cited works

@@ -87,6 +87,8 @@ Ctrl+Y in Neovim serves to pick the first autocomplete option, more effective th
 loginctl suspend
 from elogind, works to suspend (sleep to mem) your system without root access, like an easier
 echo mem >/sys/power/state
+other (systemd) distros use
+systemctl suspend
 
 POSIX sh's test command includes the form [ A -nt B ], for "file A newer than file B"
 it treats files that don't exist as older than any file that does exist, but all files that don't exist are of equal age
@@ -158,3 +160,8 @@ fix: run sway as
 export XDG_CURRENT_DESKTOP=sway dbus-run-session sway
 with the following line in sway config
 exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+update NixOS system in-place with
+nixos-rebuild switch --upgrade
+
+available kernel modules are in /lib/modules/VERSION/kernel/ which on NixOS is really /nix/store/HASH-linux-VERSION-modules/lib/modules/VERSION/kernel/ and can be grasped further with modinfo utility
