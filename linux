@@ -164,4 +164,18 @@ exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activati
 update NixOS system in-place with
 nixos-rebuild switch --upgrade
 
-available kernel modules are in /lib/modules/VERSION/kernel/ which on NixOS is really /nix/store/HASH-linux-VERSION-modules/lib/modules/VERSION/kernel/ and can be grasped further with modinfo utility
+turn a photo/scan into "lineart" (black-white PNG) with something like
+magick photo.jpg -crop WxH+X+Y -resize 25% -rotate 90 -threshold 50% out.png
+
+update a NixOS system guided by a /etc/nixos/flake.nix with
+cd /etc/nixos/ && nixos-rebuild switch --flake .#hostname
+
+flake-ily open a shell with an extra program available with
+nix shell nixpkgs#package-name
+
+to use wpa_cli on NixOS, you need
+networking.wireless.userControlled = true;
+
+3l keyboard layout lets you type lowercase Greek letters with Shift+Sym+letter, phonetically to match the English layout
+
+keyboard layouts for the Linux console are given by kbd in /usr/share/kbd/keymaps/ , of which most of general interest are in i386/

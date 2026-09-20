@@ -28,7 +28,7 @@ FOOTER = """
 </html>
 """
 SOURCES = [
-    "aphorisms", "curiosities", "linux", "publish", "quests", "webdev",
+    "aphorisms", "curiosities", "heylang", "linux", "publish", "quests", "webdev",
 ]
 
 for source_name in SOURCES:
