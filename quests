@@ -34,3 +34,7 @@ ergonomically split-tilted keyboard, made cheaper and more flexible (figurativel
 smart pen attached by stretch-sensing cables (three of them?) to fixed points, such that moving the pen stretches/compresses the cables such that a controller than infer pen-tip's position
 thus a drawing tablet: x and y of the pen transmit to x and y on the screen, when and only when z of the pen is close enough to z of the page
 two cables might suffice, if the pen is conductive as to enable a simple on/off-canvas test
+
+sensor to affix to the neck to detect and report/deter head tremors
+
+plain TODO list synced between devices, maybe Syncthing over a directory of numbered single-line files, but ideally find existing app

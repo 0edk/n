@@ -3,17 +3,24 @@ concepts and features for a programming language tentatively called Hey
 three key innovations, of usefulnesses TBD: operator-oriented syntax, scoped implicit variables, bounded for-while loops
 
 tilde ~ for I/O stream transfer looked like a good move, should copy that here
+it takes one argument a buffer, and the other a stream, writing from left to right, returning the quantity so moved
+implicit arguments, for a unary usage, are stdin on the left or stdout on the right
 
 a loop takes its bounds from the left of an at-sign @ and its content from the right
 the "while" aspect comes from the conditional break, with the question-mark ? operator: left side condition, right side break-value
 with no bounds written, the loop follows (Python) range(0, 1, 1), which yields a "sugar" for if-else expressions:
-@(cond?true_val
-false_val)
+(@cond?true_val)|false_val
 longer if-else chains drop out naturally from this notation:
-@(cond1?val1
+(@(cond1?val1
 cond2?val2
-cond3?val3
-else_val)
+cond3?val3))|else_val
+
+a loop without break intuitively returns the same as its body would, usually the last expression because the body is multiple "lines"
+but a loop could run for zero iterations, and so would never evaluate the body, so it may be more robust to define its return value as a separate expression evaluated once at the end
+this final-expression form works assuming the conjecture that anything expressed in the loop can be just as well expressed after the loop
+that form makes it much resemble an "enhanced" try-catch, and thus probably yield a par-type, for the linear logicians
+downside: now the loop syntax is a ternary operator on bounds, body, and default return value
+alternatively, a loop makes its return value nullable, and returns null if there was no explicit break, to be corrected as needed with a logical or outside the loop
 
 a loop's "bounds" may include a function amidst the numbers, which would map each index to a value for the implicit !
 a function that returns a (length, indexer) pair would then be an iterable, guaranteed bounded by this indexing property
@@ -33,6 +40,7 @@ it's right-associative
 
 several operators each introduce an implicit variable available to their subexpressions via exclamation-mark ! which variables usually depend on the left and are accessed on the right
 implicits from further scopes come from repeated !s
+dot . makes the whole LHS implicit
 colon : makes the whole LHS implicit, to obviate augmented-assignment operators
 at-sign @ makes the loop counter implicit
 question-mark ? makes the conditioned value implicit
@@ -47,10 +55,12 @@ some operators such as colon : don't literally evaluate their LHS
 e.g. cond?!:0 evaluates almost like (Python) (cond := False) if cond else None, instead of an error from "0 is not an lvalue"
 cond|n<10?!:0 might error from "|-operation is not an lvalue", but fancifully we could take cond|n<10:0 to mean (Python) (cond := 0) if cond else (n := 10), for 10 is the least value making n<10 false
 
+array-pointers shall be slices, a pair of pointer and length
+
 Project Euler 1
 s:0
-1001@@(i!!%3=0|i%5=0?s:!+i
-s)
+1001@@i!!%3=0|i%5=0?s:!+i
+s
 
 Project Euler 2
 s:0
@@ -58,8 +68,7 @@ a:1
 b:1
 44@(a>4000000?s
 @a%2=0?s:!+a
-b:a+(a:b)
-s)
+b:a+(a:b))|s
 
 Project Euler 3
 N:600851475143
@@ -67,17 +76,15 @@ k:2
 isqrt$N@(k*k>N?N
 (q,r)!(N/k)
 @(r=0?N:q
-k:!+1)
--1)
+k:!+1))
 
 Project Euler 10
 primes.200000:
 known:total:0
 2:2000000@(cand!!
-@((known@(p!(primes.!)
+@(((known@(p!(primes.!)
 p*p>cand?1
-cand%p=0?0
-1))?(total:!+(primes.known:cand)
+cand%p=0?-1))|1)>0?(total:!+(primes.known:cand)
 known:!+1)))
 total
 
@@ -99,7 +106,7 @@ $ function call
 . index
 / divide
 : assign mutable
-;
+; function definition
 < less than
 = equal to
 > greater than
@@ -115,3 +122,26 @@ _
 | logical or
 }
 ~ stream transfer
+
+operator associativity and precedence, tight to loose:
+U ( )
+L digits
+L letters
+R " '
+L space
+R !
+L .
+R $
+L ~
+L % * /
+L + -
+L < = >
+L &
+L |
+L ,
+R ;
+R :
+R ?
+R @
+R #
+L newline
