@@ -181,3 +181,7 @@ networking.wireless.userControlled = true;
 keyboard layouts for the Linux console are given by kbd in /usr/share/kbd/keymaps/ , of which most of general interest are in i386/
 
 my NixOS has a local extracted copy of nixpkgs source in /nix/store/HASH-source/ for reasons unclear so far
+
+to get an environment from a Nix flake without committing flake.nix to git
+git add --intent-to-add flake.nix
+nix develop
