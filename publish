@@ -37,19 +37,19 @@ for source_name in SOURCES:
         with open(source_name, "r") as source:
             target.write(HEADER.format(
                 short=source_name,
-                long="notes-to-HTML script" if reflective
+                long="note page list and notes-to-HTML script" if reflective
                     else source.readline(),
             ))
             if reflective:
-                target.write("<pre>\n")
-                target.write(html.escape(source.read()))
-                target.write("</pre>\n")
                 target.write("<ul>notes available:\n")
                 target.write("\n".join(
                     f"<li><a href=\"{name}.html\">{name}</a></li>"
                     for name in SOURCES
                 ))
                 target.write("</ul>")
+                target.write("<pre>\n")
+                target.write(html.escape(source.read()))
+                target.write("</pre>\n")
             else:
                 target.write("\n".join(
                     f"<p>{html.escape(paragraph)}</p>"
